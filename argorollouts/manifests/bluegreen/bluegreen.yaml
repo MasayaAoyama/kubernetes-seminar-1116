@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: argoproj/rollouts-demo:green
+        image: argoproj/rollouts-demo:blue
   strategy:
     blueGreen:
       activeService: rollout-bluegreen-active
