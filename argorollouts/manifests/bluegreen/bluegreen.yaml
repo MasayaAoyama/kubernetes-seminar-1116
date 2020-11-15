@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: sample-bluegreen
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: sample-bluegreen
+  template:
+    metadata:
+      labels:
+        app: sample-bluegreen
+    spec:
+      containers:
+      - name: app
+        image: argoproj/rollouts-demo:blue
+  strategy:
+    blueGreen:
+      activeService: rollout-bluegreen-active
+      previewService: rollout-bluegreen-preview
+      autoPromotionEnabled: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-active
+spec:
+  type: LoadBalancer
+  selector:
+    app: sample-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  type: LoadBalancer
+  selector:
+    app: sample-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
