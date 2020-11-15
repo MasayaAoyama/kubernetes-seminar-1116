@@ -1,0 +1,58 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice-a
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MasayaAoyama/kubernetes-seminar-1116.git
+    targetRevision: main
+    path: argocd/manifests/microservice-a/
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservice-a
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 0
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice-b
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MasayaAoyama/kubernetes-seminar-1116.git
+    targetRevision: main
+    path: argocd/manifests/microservice-b/
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservice-b
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 0
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+    syncOptions:
+    - CreateNamespace=true

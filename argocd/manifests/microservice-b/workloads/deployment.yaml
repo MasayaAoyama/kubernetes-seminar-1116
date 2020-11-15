@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-b
+  namespace: microservice-b
+  labels:
+    app.kubernetes.io/instance: microservice-b
+    app.kubernetes.io/part-of: microservice-b
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/component: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: microservice-b
+      role: app
+  template:
+    metadata:
+      labels:
+        service: microservice-b
+        role: app
+    spec:
+      serviceAccountName: microservice-b
+      containers:
+        - name: microservice-b
+          image: amsy810/echo-nginx:v2.0
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          ports:
+            - containerPort: 80

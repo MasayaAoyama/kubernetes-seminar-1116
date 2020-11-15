@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-b
+  namespace: microservice-b
+  labels:
+    app.kubernetes.io/instance: microservice-b
+    app.kubernetes.io/part-of: microservice-b
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/component: app
+spec:
+  type: ClusterIP
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+  selector:
+    service: microservice-b
+    role: app
+
