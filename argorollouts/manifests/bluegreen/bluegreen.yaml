@@ -26,7 +26,7 @@ kind: Service
 metadata:
   name: rollout-bluegreen-active
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: sample-bluegreen
   ports:
@@ -39,7 +39,7 @@ kind: Service
 metadata:
   name: rollout-bluegreen-preview
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: sample-bluegreen
   ports:

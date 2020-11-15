@@ -21,7 +21,6 @@ spec:
         service: microservice-b
         role: app
     spec:
-      serviceAccountName: microservice-b
       containers:
         - name: microservice-b
           image: amsy810/echo-nginx:v2.0
