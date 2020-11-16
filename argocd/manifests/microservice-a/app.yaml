@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: microservice-a
-          image: amsy810/echo-nginx:v2.0
+          image: nginx:1.17
           resources:
             requests:
               cpu: 50m
