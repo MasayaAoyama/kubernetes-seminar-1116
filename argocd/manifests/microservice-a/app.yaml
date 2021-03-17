@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: microservice-a
-          image: nginx:1.17
+          image: nginx:1.18
           resources:
             requests:
               cpu: 50m
